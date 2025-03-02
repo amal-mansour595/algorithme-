@@ -1,0 +1,26 @@
+ALGORITHM AnalyzeSentence
+VAR
+    length: INTEGER := 0        
+    word_count: INTEGER := 0   
+    vowel_count: INTEGER := 0
+    ch: CHARACTER 
+BEGIN
+    WRITE ("Enter a sentence ending with a period:")
+    
+    REPEAT
+        READ(ch) 
+        length := length + 1 
+        
+        
+        IF ch = "a" OR ch = "e" OR ch = "i" OR ch = "o" OR ch = "u" OR ch = "y" OR
+        ch = "A" OR ch = "E" OR ch = "I" OR ch = "O" OR ch = "U" OR ch = "Y" THEN
+            vowel_count := vowel_count + 1
+        ENDIF
+        
+        IF ch = " " THEN
+            word_count := word_count + 1
+        ENDIF
+    WRITE ("Sentence length: ", length)
+    WRITE ("Number of words: ", word_count)
+    WRITE ("Number of vowels: ", vowel_count)
+END
