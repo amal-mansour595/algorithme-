@@ -1,20 +1,37 @@
 ALGORITHM AnalyzeSentence
 VAR
- ch:=STRING
- nb_word:=INTEGER
- nb_voyelle:=INTEGER
+    length: INTEGER := 0
+    word_count: INTEGER := 0
+    vowel_count: INTEGER := 0
+     ch: CHARACTER
+    prev_char: CHARACTER := ' ' 
 BEGIN
-   write ("entrer a syntaxe")
-   read(ch)
-   nb_word:=1
-   nb_voyelle:=0
-   FOR (i:=0;i<ch.length;i++ )   DO
-    if(ch[i]=="")
-    nb_word=nb_word+1
-    if (ch[i]in ["a","e","i","o","u","y","A","E","I","O","U","Y" ])
-    nb_voyelle:=nb_voyelle+1
-   END_FOR
-   write(nb_word)
-   write(nb_voyelle)
-   write(ch.length)
+    WRITE ("Enter a sentence ending with a period:")
+   
+    REPEAT
+        READ(ch) 
+        length := length + 1 
+
+        // Vérifier si le caractère est une voyelle
+        IF ch IN ["a", "e", "i", "o", "u", "y", "A", "E", "I", "O", "U", "Y"] THEN
+            vowel_count := vowel_count + 1
+        ENDIF
+
+        // Compter les mots (transition espace -> lettre)
+        IF ch = " " AND prev_char ≠ " " THEN
+            word_count := word_count + 1
+        ENDIF
+
+        prev_char := ch 
+
+    UNTIL ch = "."  // La boucle s'arrête lorsque la phrase se termine par un point.
+
+    // Vérifier si le dernier caractère avant le point était une lettre pour compter le dernier mot.
+    IF prev_char ≠ " " AND prev_char ≠ "." THEN
+        word_count := word_count + 1
+    ENDIF
+
+    WRITE ("Sentence length: ", length)
+    WRITE ("Number of words: ", word_count)
+    WRITE ("Number of vowels: ", vowel_count)
 END
